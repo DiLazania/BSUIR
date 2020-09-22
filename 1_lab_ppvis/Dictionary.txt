@@ -1,0 +1,12 @@
+Hello
+Привет
+Bye
+Пока
+Work
+Работа
+Cloud
+Облако
+Zero
+Ноль
+Apple
+Яблоко

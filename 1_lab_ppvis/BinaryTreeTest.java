@@ -35,13 +35,37 @@ public class BinaryTreeTest {
         bt.addNode("Cloud", "Облако");
         bt.addNode("Apple", "Яблоко");
         bt.addNode("Zero", "Ноль");
-        bt.addNode("WZork", "Тест");
-        bt.addNode("WZaork", "Тест");
+        bt.addNode("Wzork", "Тест");
+        bt.addNode("Wzaork", "Тест");
 
         bt.removeNode("Hello");
 
-        String expected = "WZaork";
+        String expected = "Work";
         String actual = bt.getRoot().getEngTrans();
+        assertEquals(expected, actual);
+
+        expected = "Zero";
+        actual = bt.getRoot().getRightChild().getEngTrans();
+        assertEquals(expected, actual);
+
+        expected = "Wzork";
+        actual = bt.getRoot().getRightChild().getLeftChild().getEngTrans();
+        assertEquals(expected, actual);
+
+        expected = "Bye";
+        actual = bt.getRoot().getLeftChild().getEngTrans();
+        assertEquals(expected, actual);
+
+        expected = "Cloud";
+        actual = bt.getRoot().getLeftChild().getRightChild().getEngTrans();
+        assertEquals(expected, actual);
+
+        expected = "Apple";
+        actual = bt.getRoot().getLeftChild().getLeftChild().getEngTrans();
+        assertEquals(expected, actual);
+
+        expected = "Wzaork";
+        actual = bt.getRoot().getRightChild().getLeftChild().getLeftChild().getEngTrans();
         assertEquals(expected, actual);
 
     }

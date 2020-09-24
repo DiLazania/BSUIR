@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -8,10 +9,12 @@ public class Main {
 
         Scanner in = new Scanner(System.in);
         BinaryTree bt = new BinaryTree();
+        BT_Window window = new BT_Window(bt);
 
         while (true){
 
-            System.out.println("1 - Add\n2 - Print\n3 - Remove\n4 - Replace\n5 - Read Dictionary\n6 - Print Amount\n");
+            System.out.println("1 - Add\n2 - Print\n3 - Remove\n4 - Replace\n5 - Read Dictionary\n6 - Print Amount" +
+                    "\n7 - Run window\n");
             int choice = in.nextInt();
 
             if(choice == 1){
@@ -59,13 +62,7 @@ public class Main {
 
             else if(choice == 7){
 
-//                JFrame f = new JFrame();
-//                JButton b = new JButton("Print the Tree");
-//                b.setBounds(130, 100, 100, 40);
-//                f.add(b);
-//                f.setSize(400, 500);
-//                f.setLayout(null);
-//                f.setVisible(true);
+                window.startGUI();
 
             }
         }

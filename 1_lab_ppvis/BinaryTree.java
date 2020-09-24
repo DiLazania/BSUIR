@@ -50,7 +50,7 @@ public class BinaryTree {
         }
     }
 
-    /// @param Containts the word that should be removed.
+    /// @param Contains the word that should be removed.
     /// @note At first looks for the node that's going to be removed, then finding the place of the node that the removing node can be replaced by, and deleting in the end.
     public boolean removeNode(String engTrans){
 
@@ -157,6 +157,7 @@ public class BinaryTree {
 
             printNodes(focusNode.getRightChild());
             printNodes(focusNode.getLeftChild());
+
 
         }
 

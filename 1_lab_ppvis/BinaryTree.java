@@ -9,6 +9,11 @@ public class BinaryTree {
     /// @param Two strings for translations of both languages.
     public void addNode(String engTrans, String rusTrans){
 
+        if(engTrans.matches(".*\\d+.*") || rusTrans.matches(".*\\d+.*")){
+            System.out.println("Please don't use numbers.");
+            return;
+        }
+
         Node newNode = new Node(engTrans, rusTrans);
 
         if(root == null){
@@ -54,24 +59,38 @@ public class BinaryTree {
     /// @note At first looks for the node that's going to be removed, then finding the place of the node that the removing node can be replaced by, and deleting in the end.
     public boolean removeNode(String engTrans){
 
+        if(engTrans.matches(".*\\d+.*")){
+            System.out.println("Please don't use numbers.");
+            return false;
+        }
+
         Node focusNode = root;
         Node parent = root;
         boolean isItALeftChild = true;
 
-        while(focusNode.getEngTrans().compareTo(engTrans) != 0){
+        try{
 
-            parent = focusNode;
+            while(focusNode.getEngTrans().compareTo(engTrans) != 0){
 
-            if(engTrans.compareTo(focusNode.getEngTrans()) < 0){
-                isItALeftChild = true;
-                focusNode = focusNode.getLeftChild();
-            } else {
-                isItALeftChild = false;
-                focusNode = focusNode.getRightChild();
+                parent = focusNode;
+
+                if(engTrans.compareTo(focusNode.getEngTrans()) < 0){
+                    isItALeftChild = true;
+                    focusNode = focusNode.getLeftChild();
+                } else {
+                    isItALeftChild = false;
+                    focusNode = focusNode.getRightChild();
+                }
+                if(focusNode == null){
+                    return false;
+                }
+
             }
-            if(focusNode == null){
-                return false;
-            }
+
+        } catch (NullPointerException e){
+
+            System.out.println("There are no nodes yet.");
+            return false;
 
         }
 
@@ -149,7 +168,11 @@ public class BinaryTree {
 
     }
 
-    public void printNodes(Node focusNode){
+    public void printNodes (Node focusNode){
+
+        if(getAmount(root) == 0){
+            return;
+        }
 
         if(focusNode != null){
 
@@ -158,45 +181,39 @@ public class BinaryTree {
             printNodes(focusNode.getRightChild());
             printNodes(focusNode.getLeftChild());
 
-
         }
 
     }
 
     public Node getRoot(){
-
         return root;
-
     }
 
     public int getAmount(Node focusNode){
 
+        if(focusNode == null){
+
+            System.out.println("May be add some nodes or something...");
+            return 0;
+
+        }
+
         if(focusNode.getLeftChild() == null && focusNode.getRightChild() == null){
-
             return 1;
-
         }
 
         int left, right;
 
         if(focusNode.getLeftChild() != null){
-
             left = getAmount(focusNode.getLeftChild());
-
         } else {
-
             left = 0;
-
         }
 
         if(focusNode.getRightChild() != null){
-
             right = getAmount(focusNode.getRightChild());
-
         } else {
-
             right = 0;
-
         }
 
         return left + right + 1;
@@ -205,21 +222,37 @@ public class BinaryTree {
 
     public void replaceNode(String key, String engTrans, String rusTrans, BinaryTree bt){
 
+        if(engTrans.matches(".*\\d+.*") || rusTrans.matches(".*\\d+.*") || key.matches(".*\\d+.*")){
+            System.out.println("Please don't use numbers.");
+            return;
+        }
+
         bt.removeNode(key);
-        bt.addNode(engTrans, rusTrans);
+
+        if(getAmount(root) != 0){
+            bt.addNode(engTrans, rusTrans);
+        }
 
     }
 
-    public void fileReading(BinaryTree bt) throws FileNotFoundException {
+    public void fileReading(BinaryTree bt) {
 
-        File file = new File("C:\\Users\\Василий\\Desktop\\1labPPvIS\\src\\Dictionary.txt");
-        Scanner scan = new Scanner(file);
+        try{
 
-        while(scan.hasNextLine()){
+            File file = new File("C:\\Users\\Василий\\Desktop\\main\\working on\\ppvis\\1labPPvIS\\src\\file.txt");
+            Scanner scan = new Scanner(file);
 
-            String engTrans = scan.nextLine();
-            String rusTrans = scan.nextLine();
-            bt.addNode(engTrans, rusTrans);
+            while(scan.hasNextLine()){
+
+                String engTrans = scan.nextLine();
+                String rusTrans = scan.nextLine();
+                bt.addNode(engTrans, rusTrans);
+
+            }
+
+        } catch (FileNotFoundException e){
+
+            System.out.println("The file is not found.");
 
         }
 
